@@ -22,8 +22,10 @@ mecanica/
 ├── 
 ├── 
 ├── 
-├──  
+├──Banco.sql # Script SQL: cria o banco e as 5 tabelas
 └──modelo_logico_conceitual.pdf # modelo conceitual e logico do BD mecanica
+https://app.brmodeloweb.com/publicview/6a83b96ab01df802fa95402d - conceitual 
+https://app.brmodeloweb.com/publicview/6a83b0ebb01df802fa953ee9 - logico
 
 
 
