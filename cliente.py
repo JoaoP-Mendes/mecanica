@@ -1,7 +1,7 @@
-"""from banco import BancoDados
+from banco import BancoDados
 
 connObj = BancoDados()
-connObj.conectar()"""
+connObj.conectar()
 
 class Cliente():
     def __init__(self, conexao, cpf, nome, data_nascimento, telefone, ativo):
@@ -35,6 +35,40 @@ class Cliente():
         except Exception as e:
             print(f"An error occured: {e}")
 
+    @staticmethod #Define como método não uma instancia, ou seja, não é necessário o self
+    def listarClientes(conexao):
+        try:
+            buscar = "SELECT * FROM cliente"
+            resultado = conexao.executar(buscar)
+            return resultado
+        except Exception as e:
+            print(f"An error occured: {e}")
+
+    @staticmethod
+    def buscarPorCpf(conexao, valor):
+        try:
+            buscar = "SELECT * FROM cliente WHERE cpf = %s"
+            resultado = conexao.executar(buscar, (valor,))
+            return resultado
+        except Exception as e:
+            print(f"An error occured: {e}")
+
+    @staticmethod
+    def deletarCliente(conexao, valor):
+        try:
+            deletar = "DELETE FROM cliente WHERE cpf = %s"
+            conexao.executar(deletar, (valor,))
+        except Exception as e:
+            print(f"An error occured: {e}")
+
+    @staticmethod
+    def atualizarCliente(conexao, tabela, novo, onde):
+        try:
+            pass
+        except Exception as e:
+            print(f"An error occured: {e}")
+
+
 
 """cpf = input("Digite o CPF: ")
 nome = input("Digite o nome: ")
@@ -42,8 +76,17 @@ data_nascimento = input("Data nascimento: ")
 telefone = input("Qual o telefone: ")
 ativo = input("Está ativo? S/N ").upper()
 
-cliente = Cliente(connObj, cpf, nome, data_nascimento, telefone, ativo)
-Cliente.novoCliente(cliente)"""
+cliente = Cliente(connObj, cpf, nome, data_nascimento, telefone, ativo)"""
+
+#retorno = Cliente.listarClientes(connObj)
+#for r in retorno:
+#    print(r)
+
+# retorno = Cliente.buscarPorCpf(connObj, 12345678911)
+# for i in retorno:
+#     print(i)
+
+
 
 """class Pessoa:
     def __init__(self, idade):
