@@ -3,12 +3,14 @@ from banco import BancoDados
 connObj = BancoDados()
 connObj.conectar()
 
+from datetime import date
+
 class Cliente():
     def __init__(self, conexao, cpf, nome, data_nascimento, telefone, ativo):
         self.conexao = conexao
         self.cpf = cpf
-        self.nome = nome
         self.data_nascimento = data_nascimento
+        self.nome = nome
         self.telefone = telefone
         self.ativo = ativo
 
@@ -31,7 +33,7 @@ class Cliente():
         """Realiza o envio de um novo cliente para o banco de dados"""
         try:
             inserindo = "INSERT INTO cliente (cpf, nome, data_nascimento, telefone, ativo_sn) VALUES (%s, %s, %s, %s, %s)"
-            self.conexao.executar(inserindo, (self.cpf, self.nome, self.data_nascimento, self.telefone, self.ativo))
+            self.conexao.executar(inserindo, (self.cpf, self.nome, self. data_nascimento, self.telefone, self.ativo))
             print("Cadastrado")
         except Exception as e:
             print(f"An error occured: {e}")
@@ -79,9 +81,9 @@ data_nascimento = input("Data nascimento: ")
 telefone = input("Qual o telefone: ")
 ativo = input("Está ativo? S/N ").upper()
 
-cliente = Cliente(connObj, cpf, nome, data_nascimento, telefone, ativo)
-cliente.novoCliente()"""
-
+cliente = Cliente(connObj, cpf, nome,data_nascimento, telefone, ativo)
+cliente.novoCliente()
+"""
 #retorno = Cliente.listarClientes(connObj)
 #for r in retorno:
 #    print(r)
@@ -95,7 +97,7 @@ cliente.novoCliente()"""
 
 # tabelas = {'ativo_sn'}
 # oqueatualizar = input("O que atualizar? ")
-# if oqueatualizar in tabelas: 
+# if oqueatualizar in tabelas:
 #     novainfo = input("Digite a nova info: ")
 #     dequem = input("De quem? ")
 #     Cliente.atualizarCliente(connObj, oqueatualizar, novainfo, dequem)
