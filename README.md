@@ -12,18 +12,18 @@ Esse projeto é um remake do meu trabalho academico da faculde do repositório: 
 
 ## Estrutura -- 
 
+
 mecanica/
+├── banco.sql                       # Script SQL: cria o banco e as 5 tabelas
+├── config.py                       # Dados de conexão com o MySQL
+├── banco.py                        # Classe Bancodados: conexão e execução de queries
+├── cliente.py                      # Classe cliente: CRUD de clientes
+├── veiculo.py                      # Classe veiculo: CRUD de veiculos
 ├── 
 ├── 
-├── 
-├── 
-├── 
-├──
-├── 
-├── 
-├── 
-├──Banco.sql # Script SQL: cria o banco e as 5 tabelas
-└──modelo_logico_conceitual.pdf # modelo conceitual e logico do BD mecanica
+├── modelo_logico_conceitual.pdf    # modelo conceitual e logico do BD mecanica
+└── main.py                         # Menu do terminal, ponto de entrada do programa
+
 https://app.brmodeloweb.com/publicview/6a83b96ab01df802fa95402d - conceitual 
 https://app.brmodeloweb.com/publicview/6a83b0ebb01df802fa953ee9 - logico
 
