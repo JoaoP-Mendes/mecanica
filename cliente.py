@@ -32,6 +32,7 @@ class Cliente():
         try:
             inserindo = "INSERT INTO cliente (cpf, nome, data_nascimento, telefone, ativo_sn) VALUES (%s, %s, %s, %s, %s)"
             self.conexao.executar(inserindo, (self.cpf, self.nome, self.data_nascimento, self.telefone, self.ativo))
+            print("Cadastrado")
         except Exception as e:
             print(f"An error occured: {e}")
 
@@ -58,13 +59,15 @@ class Cliente():
         try:
             deletar = "DELETE FROM cliente WHERE cpf = %s"
             conexao.executar(deletar, (valor,))
+            print("Exclusão realizada\n")
         except Exception as e:
             print(f"An error occured: {e}")
 
     @staticmethod
     def atualizarCliente(conexao, tabela, novo, onde):
         try:
-            pass
+            atualizar = f"UPDATE cliente SET {tabela} = %s WHERE cpf = %s"
+            conexao.executar(atualizar, (novo, onde))
         except Exception as e:
             print(f"An error occured: {e}")
 
@@ -76,7 +79,8 @@ data_nascimento = input("Data nascimento: ")
 telefone = input("Qual o telefone: ")
 ativo = input("Está ativo? S/N ").upper()
 
-cliente = Cliente(connObj, cpf, nome, data_nascimento, telefone, ativo)"""
+cliente = Cliente(connObj, cpf, nome, data_nascimento, telefone, ativo)
+cliente.novoCliente()"""
 
 #retorno = Cliente.listarClientes(connObj)
 #for r in retorno:
@@ -85,6 +89,17 @@ cliente = Cliente(connObj, cpf, nome, data_nascimento, telefone, ativo)"""
 # retorno = Cliente.buscarPorCpf(connObj, 12345678911)
 # for i in retorno:
 #     print(i)
+
+# cpfcliente = input("Informe o cpf para exclusão: ")
+# cpfexclusao = Cliente.deletarCliente(connObj, cpfcliente)
+
+# tabelas = {'ativo_sn'}
+# oqueatualizar = input("O que atualizar? ")
+# if oqueatualizar in tabelas: 
+#     novainfo = input("Digite a nova info: ")
+#     dequem = input("De quem? ")
+#     Cliente.atualizarCliente(connObj, oqueatualizar, novainfo, dequem)
+
 
 
 
