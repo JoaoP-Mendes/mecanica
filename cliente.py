@@ -62,7 +62,7 @@ class Cliente():
             conexao.executar(deletar, (valor,))
             excluido()
         except pymysql.err.IntegrityError as e:
-            print(f"ERRO: Ação não realizada, será necessário remover o veículo do cliente primeiro")
+            print(f"\033[31mERRO\033[m: Ação não realizada, será necessário remover o veículo do cliente primeiro")
             print("")
         except Exception as e:
             print(f"Algo inesperado aconteceu: {e}")

@@ -78,7 +78,7 @@ class Veiculo():
             excluido()
 
         except pymysql.err.IntegrityError as e:
-            print("ERRO: Veiculo possui ordem em aberto(ou em andamento), exclua a ordem e trabalho para remover o veículo")
+            print("\033[31mERRO\033[m: Veiculo possui ordem em aberto(ou em andamento), exclua a ordem e trabalho para remover o veículo")
         except Exception as e:
             print(f"Algo inesperado aconteceu: {e}")
 

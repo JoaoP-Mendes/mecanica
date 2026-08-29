@@ -2,6 +2,7 @@ from cliente import Cliente
 from veiculo import Veiculo
 from servico import Servico
 from ordem_servico import ordem_Servico
+from layout import voltando
 
 def menu_cliente(connObj):
     while True:
@@ -50,8 +51,8 @@ def menu_cliente(connObj):
 
             elif resposta == 0:
                 print("")
-                print("Voltando para para o menu inical")
-                print("")
+                voltando()
+                break
 
             else:
                 print("")
@@ -111,8 +112,9 @@ def menu_veiculo(connObj):
 
             elif resposta == 0:
                 print("")
-                print("Voltando para para o menu inical")
-                print("")
+                voltando()
+                break
+
 
             else:
                 print("")
@@ -170,8 +172,9 @@ def menu_servico(connObj):
 
             elif resposta == 0:
                 print("")
-                print("Voltando para para o menu inical")
-                print("")
+                voltando()
+                break
+
 
             else:
                 print("")
@@ -248,8 +251,8 @@ def menu_ordem(connObj):
 
             elif resposta == 0:
                 print("")
-                print("Voltando para para o menu inical")
-                print("")
+                voltando()
+                break
 
             else:
                 print("")

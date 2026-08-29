@@ -19,8 +19,6 @@ class ordem_Servico():
         except Exception as e:
             print(f"Algo inesperado aconteceu: {e}")
 
-
-
     @staticmethod
     def listarOrdens(conexao):
         try:
@@ -48,7 +46,7 @@ class ordem_Servico():
             conexao.executar(deletar, (id, ))
             excluido()
         except pymysql.err.IntegrityError as e:
-            print("ERRO: Exclua o trabalho antes de prosseguir") 
+            print("\033[31mERRO\033[m: Exclua o trabalho antes de prosseguir") 
         except Exception as e:
             print(f"Algo inesperado aconteceu: {e}")
 
@@ -60,8 +58,6 @@ class ordem_Servico():
             atualizado()
         except Exception as e:
             print(f"Algo inesperado aconteceu: {e}")
-
-
 
 
     @staticmethod
@@ -92,4 +88,3 @@ class ordem_Servico():
             excluido()
         except Exception as e:
             print(f"Algo inesperado aconteceu: {e}")
-
