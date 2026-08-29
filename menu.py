@@ -1,12 +1,7 @@
-from banco import BancoDados
 from cliente import Cliente
 from veiculo import Veiculo
 from servico import Servico
-
-
-
-connObj = BancoDados()
-connObj.conectar()
+from ordem_servico import ordem_Servico
 
 def menu_cliente(connObj):
     while True:
@@ -130,7 +125,6 @@ def menu_veiculo(connObj):
             continue
 
 
-
 def menu_servico(connObj):
     while True:
         try:
@@ -189,8 +183,86 @@ def menu_servico(connObj):
             print(f"An error occured: {e}")
             continue
 
+def menu_ordem(connObj):
+    while True:
+        try:
+            resposta = int(input("\033[36m----- MENU ORDEM SERVIÇO -----\033[m\n1 - Nova ordem de serviço \n2 - Listar \n3 - Buscar por ID \n4 - Atualizar status \n5 - Deletar ordem \n6 - Começar trabalho \n7 - Listar trabalhos \n8 - Cancelar \n0 - Voltar para o menu\nResposta: "))
+            if resposta == 1:
+                print("")
+                idveiculo = input("\033[4mDigite o ID do veiculo\033[m: ") 
+
+                ordem = ordem_Servico(connObj, idveiculo)
+                ordem.novaOrdemServico()
+
+            elif resposta == 2: 
+                print("")
+                lista_ordem = ordem_Servico.listarOrdens(connObj)
+                print("ORDENS CRIADAS: ")
+                for cada_ordem in lista_ordem:
+                    print(cada_ordem)
+                print("")
+
+            elif resposta == 3:
+                print("")
+                id_busca_ordem = input(" \033[4mInforme o ID para busca:\033[m ")
+                resultado = ordem_Servico.buscarPorId(connObj, id_busca_ordem)
+                print("RESULTADO BUSCA: ")
+                print(resultado)
+                print("")
+
+            elif resposta == 4:
+                tabelas = {'status'}
+                print("")
+                o_que_atualizar = input("\033[4mQual status atual da ordem?\033[m \n > Iniciado \n > Em processo \n > Finalizado \nResposta: ")
+                if o_que_atualizar in tabelas:
+                    nova_info = input("\033[4mDigite a nova informação: \033[m ")
+                    qual_id = input("\033[4mDigite da ordem para confirmação: \033[m ")
+                    ordem_Servico.atualizarStatus(connObj, o_que_atualizar, nova_info, qual_id)
+
+
+            elif resposta == 5:
+                print("")
+                id_exclusao_ordem = input("\033[4mInforme o ID para exclusão: \033[m ")
+                ordem_Servico.deletarOrdem(connObj, id_exclusao_ordem)
+
+
+            elif resposta == 6:
+                print("")
+                id_ordem_servico = input("\033[4mInforme o ID da ordem de serviço para começar o trabalho:\033[m ")
+                id_servico = input("\033[4mInforme o ID do serviço para começar o trabalho:\033[m ")
+                ordem_Servico.adicionarItem(connObj, id_ordem_servico, id_servico)
+
+            elif resposta == 7:
+                print("")
+                lista_trabalhos = ordem_Servico.listarItens(connObj)
+                print("TRABALHOS: ")
+                for cada_trabalho in lista_trabalhos:
+                    print(cada_trabalho)
+                print("")
+
+            elif resposta == 8:
+                print("")
+                id_trabalho = input("\033[4mInforme o id do trabalho para exclusão:\033[m ")
+                ordem_Servico.deletarItem(connObj, id_trabalho)
+                print("")
+
+            elif resposta == 0:
+                print("")
+                print("Voltando para para o menu inical")
+                print("")
+
+            else:
+                print("")
+                print("\033[31mERRO\033[m: Ação não reconhecida, informe uma ação valida")
+                print("")
+                continue
+
+        except Exception as e:
+            print(f"Algo inesperado aconteceu: {e}")
+            continue
 
 #menu_cliente(connObj)
 #menu_veiculo(connObj)
+#menu_ordem(connObj)
 
 # \033[4m Texto \033[m -> sublinhado 
