@@ -31,8 +31,9 @@ class BancoDados():
                 self.conexao.commit()
                 return cursor.lastrowid
 
+       
         except Exception as e:
-            print(f"An error occured: {e}")
+            raise
 
 
 """query = "SELECT * FROM livros WHERE id = %s"
