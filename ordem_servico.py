@@ -64,7 +64,21 @@ class ordem_Servico():
 
 
     @staticmethod
-    def
+    def listarItens(conexao):
+        try:
+            busca = "SELECT * FROM itens_servico"
+            resultado = conexao.executar(busca)
+            return resultado
+        except Exception as e:
+            print(f"An error occured: {e}")
+
+    @staticmethod
+    def deletarItem(conexa, id):
+        try:
+            deletar = "DELETE FROM itens_servico WHERE id = %s"
+            conexa.executar(deletar(id,))
+        except Exception as e:
+            print(f"An error occured: {e}")
 
 
 """id_veiculo = input("Id: ")
