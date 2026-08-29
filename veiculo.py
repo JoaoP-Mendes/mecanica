@@ -41,7 +41,7 @@ class Veiculo():
 
 
     def novoVeiculo(self):
-        """Realiza o cadastro de um novo veiculo, deve ser declarado o objeto para depois a comunicação com o banco"""
+        """Metodo que realiza o cadastro de um novo veiculo, deve ser declarado o objeto para depois a comunicação com o banco"""
         try:
             inserindo = "INSERT INTO veiculo (cpf_cliente, placa, ano, km_atual, marca) VALUES (%s, %s, %s, %s, %s)"
             self.conexao.executar(inserindo, (self.cpf_cliente, self.placa, self.ano, self.km_atual, self.marca))
@@ -52,6 +52,7 @@ class Veiculo():
 
     @staticmethod
     def listarVeiculos(conexao):
+        """Metodo que lista todos os veiculos do banco de dados, retorna em uma lista, necessário infomar a conexão"""
         try:
             busca = "SELECT * FROM veiculo"
             resultado = conexao.executar(busca)
@@ -62,6 +63,7 @@ class Veiculo():
 
     @staticmethod
     def buscarPorPlaca(conexao, placa):
+        """Metodo para realizar a busca no banco, retorna em uma lista, necessário infomar a conexão e placa"""
         try:
             busca = "SELECT * FROM veiculo WHERE placa = %s"
             resultado = conexao.executar(busca, (placa, ))
@@ -72,6 +74,7 @@ class Veiculo():
 
     @staticmethod
     def deletarVeiculo(conexao, placa):
+        """Metodo para realizar a exclusão de um veículo, necessário informar a conexão e placa"""
         try:
             deletar = "DELETE FROM veiculo WHERE placa = %s"
             conexao.executar(deletar, (placa, ))
@@ -84,6 +87,7 @@ class Veiculo():
 
     @staticmethod
     def atualizarVeiculo(conexao, tabela, novo, onde):
+        """Método para realizar atualização de informação do veículo, necessário informar conexão, tabela, nova informação e placa para alteração"""
         try:
             atualizar = f"UPDATE veiculo SET {tabela} = %s WHERE placa = %s"
             conexao.executar(atualizar, (novo, onde))

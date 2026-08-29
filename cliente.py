@@ -27,7 +27,7 @@ class Cliente():
 
 
     def novoCliente(self):
-        """Realiza o envio de um novo cliente para o banco de dados"""
+        """Metodo que realiza o cadastro de um novo cliente, deve ser declarado o objeto para depois a comunicação com o banco"""
         try:
             inserindo = "INSERT INTO cliente (cpf, nome, data_nascimento, telefone, ativo_sn) VALUES (%s, %s, %s, %s, %s)"
             self.conexao.executar(inserindo, (self.cpf, self.nome, self. data_nascimento, self.telefone, self.ativo))
@@ -37,6 +37,8 @@ class Cliente():
 
     @staticmethod #Define como método não uma instancia, ou seja, não é necessário o self
     def listarClientes(conexao):
+        """Metodo que lista todos os clientes do banco de dados, retorna em uma lista, necessário infomar a conexão"""
+
         try:
             buscar = "SELECT * FROM cliente"
             resultado = conexao.executar(buscar)
@@ -47,6 +49,8 @@ class Cliente():
 
     @staticmethod
     def buscarPorCpf(conexao, valor):
+        """Metodo para realizar a busca do cliente no banco, retorna em uma lista, necessário infomar a conexão e cpf"""
+
         try:
             buscar = "SELECT * FROM cliente WHERE cpf = %s"
             resultado = conexao.executar(buscar, (valor,))
@@ -57,6 +61,8 @@ class Cliente():
 
     @staticmethod
     def deletarCliente(conexao, valor):
+        """Metodo para realizar a exclusão de um cliente no banco, necessário informar a conexão e cpf"""
+
         try:
             deletar = "DELETE FROM cliente WHERE cpf = %s"
             conexao.executar(deletar, (valor,))
@@ -69,6 +75,8 @@ class Cliente():
 
     @staticmethod
     def atualizarCliente(conexao, tabela, novo, onde):
+        """Método para realizar atualização dos dados do cliente, necessário informar conexão, a tabela, nova informação e cpf para alteração"""
+
         try:
             atualizar = f"UPDATE cliente SET {tabela} = %s WHERE cpf = %s"
             conexao.executar(atualizar, (novo, onde))
