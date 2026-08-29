@@ -1,4 +1,7 @@
 from banco import BancoDados
+from layout import cadastrado, carregando, excluido, atualizado
+
+
 
 connObj = BancoDados()
 connObj.conectar()
@@ -47,7 +50,7 @@ class Veiculo():
         try:
             inserindo = "INSERT INTO veiculo (cpf_cliente, placa, ano, km_atual, marca) VALUES (%s, %s, %s, %s, %s)"
             self.conexao.executar(inserindo, (self.cpf_cliente, self.placa, self.ano, self.km_atual, self.marca))
-            print("Cadastrado")
+            cadastrado()
         except Exception as e:
             print(f"An error occured: {e}")
 
@@ -57,6 +60,7 @@ class Veiculo():
         try:
             busca = "SELECT * FROM veiculo"
             resultado = conexao.executar(busca)
+            carregando()
             return resultado
         except Exception as e:
             print(f"An error occured")
@@ -66,6 +70,7 @@ class Veiculo():
         try:
             busca = "SELECT * FROM veiculo WHERE placa = %s"
             resultado = conexao.executar(busca, (placa, ))
+            carregando()
             return resultado
         except Exception as e:
             print(f"An error occured: {e}")
@@ -75,36 +80,16 @@ class Veiculo():
         try:
             deletar = "DELETE FROM veiculo WHERE placa = %s"
             conexao.executar(deletar, (placa, ))
-            print("Exclusão realizada")
+            excluido()
         except Exception as e:
             print(f"An error occured: {e}")
 
     @staticmethod
-    def atualizarCliente(conexao, tabela, novo, onde):
+    def atualizarVeiculo(conexao, tabela, novo, onde):
         try:
             atualizar = f"UPDATE veiculo SET {tabela} = %s WHERE placa = %s"
             conexao.executar(atualizar, (novo, onde))
+            atualizado()
         except Exception as e:
             print(f"An error occured: {e}")
         
-
-"""cpf_cliente = input("Digite o cpf: ")
-placa = input("Digite a placa: ")
-ano = input("Ano do carro: ")
-km_atual = input("Quilometragem do carro: ")
-marca = input("Qual a marca? ")
-
-carro = Veiculo(connObj, cpf_cliente, placa, ano, km_atual, marca)
-carro.novoVeiculo()
-"""
-# busca = Veiculo.listarVeiculos(connObj)
-# for cada in busca:
-#     print(cada)
-
-
-# busca = Veiculo.buscarPorPlaca(connObj, 'zxcv123')
-# for i in busca:
-#     print(i)
-
-# placa = input("Informe o CPF para exclusao: ")
-# Veiculo.deletarVeiculo(connObj, placa)

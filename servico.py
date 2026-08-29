@@ -1,4 +1,5 @@
 from banco import BancoDados
+from layout import cadastrado, carregando, excluido, atualizado
 
 conn = BancoDados ()
 conn.conectar()
@@ -15,7 +16,8 @@ class Servico():
         try:
             inserindo = "INSERT INTO servico ( servico, valor) VALUES (%s, %s)"
             self.conexao.executar(inserindo, (self.servico, self.valor))
-            print("Cadastrado")
+            cadastrado()
+       
         except Exception as e:
             print(f"An error occured: {e}")
 
@@ -24,6 +26,7 @@ class Servico():
         try:
             busca = "SELECT * FROM servico"
             resultado = conexao.executar(busca)
+            carregando()
             return resultado
         except Exception as e:
             print(f"An error occured: {e}")
@@ -33,6 +36,7 @@ class Servico():
         try:
             busca = "SELECT * FRROM servico WHERE id = %s"
             resultado = conexao.executar(busca,(id,))
+            carregando()
             return resultado
         except Exception as e:
             print(f"An error occured: {e}")
@@ -42,6 +46,7 @@ class Servico():
         try:
             deletar = "DELETE FROM servico WHERE id = %s"
             conexao.executar(deletar, (id,))
+            excluido()
         except Exception as e:
             print(f"An error occured: {e}")
 
@@ -50,6 +55,7 @@ class Servico():
         try:
             atulizar = f"UPDATE servico SET {tabela} = %s WHERE id = %s"
             conexao.executar(atulizar, (novo, onde))
+            atualizado()
         except Exception as e:
             print(f"An error occured: {e}")
 
@@ -70,5 +76,5 @@ class Servico():
 # for cada in busca:
 #     print(cada)
 
-id = input("Informe o ID para exclusão: ")
-Servico.deletarServico(conn, id)
+# id = input("Informe o ID para exclusão: ")
+# Servico.deletarServico(conn, id)
