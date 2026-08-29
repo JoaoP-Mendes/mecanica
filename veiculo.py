@@ -1,10 +1,5 @@
-from banco import BancoDados
+import pymysql # importado para tratar erro
 from layout import cadastrado, carregando, excluido, atualizado
-
-
-
-connObj = BancoDados()
-connObj.conectar()
 
 
 class Veiculo():
@@ -52,7 +47,7 @@ class Veiculo():
             self.conexao.executar(inserindo, (self.cpf_cliente, self.placa, self.ano, self.km_atual, self.marca))
             cadastrado()
         except Exception as e:
-            print(f"An error occured: {e}")
+            print(f"Algo inesperado aconteceu: {e}")
 
 
     @staticmethod
@@ -63,7 +58,7 @@ class Veiculo():
             carregando()
             return resultado
         except Exception as e:
-            print(f"An error occured")
+            print(f"Algo inesperado aconteceu: {e}")
 
     @staticmethod
     def buscarPorPlaca(conexao, placa):
@@ -73,7 +68,7 @@ class Veiculo():
             carregando()
             return resultado
         except Exception as e:
-            print(f"An error occured: {e}")
+            print(f"Algo inesperado aconteceu: {e}")
 
     @staticmethod
     def deletarVeiculo(conexao, placa):
@@ -81,8 +76,11 @@ class Veiculo():
             deletar = "DELETE FROM veiculo WHERE placa = %s"
             conexao.executar(deletar, (placa, ))
             excluido()
+
+        except pymysql.err.IntegrityError as e:
+            print("ERRO: Veiculo possui ordem em aberto(ou em andamento), exclua a ordem e trabalho para remover o veículo")
         except Exception as e:
-            print(f"An error occured: {e}")
+            print(f"Algo inesperado aconteceu: {e}")
 
     @staticmethod
     def atualizarVeiculo(conexao, tabela, novo, onde):
@@ -91,5 +89,5 @@ class Veiculo():
             conexao.executar(atualizar, (novo, onde))
             atualizado()
         except Exception as e:
-            print(f"An error occured: {e}")
+            print(f"Algo inesperado aconteceu: {e}")
         

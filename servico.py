@@ -1,8 +1,4 @@
-from banco import BancoDados
 from layout import cadastrado, carregando, excluido, atualizado
-
-conn = BancoDados ()
-conn.conectar()
 
 class Servico():
     def __init__(self, conexao, servico, valor):
@@ -59,22 +55,3 @@ class Servico():
         except Exception as e:
             print(f"An error occured: {e}")
 
-
-
-
-# servico = input("Qual seria o servico: ")
-# valor = input("Qual o valor? ")
-
-# novo = Servico(conn, servico, valor)
-# novo.novoServico()
-
-# busca = Servico.listarServicos(conn)
-# for cada in busca:
-#     print(cada)
-
-# busca = Servico.buscarPorId(conn, '1')
-# for cada in busca:
-#     print(cada)
-
-# id = input("Informe o ID para exclusão: ")
-# Servico.deletarServico(conn, id)

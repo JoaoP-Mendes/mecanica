@@ -1,9 +1,5 @@
-from banco import BancoDados
 import pymysql # importado para tratar erro
 from layout import cadastrado, carregando, excluido, atualizado
-
-connObj = BancoDados()
-connObj.conectar()
 
 
 class Cliente():
@@ -37,7 +33,7 @@ class Cliente():
             self.conexao.executar(inserindo, (self.cpf, self.nome, self. data_nascimento, self.telefone, self.ativo))
             cadastrado()
         except Exception as e:
-            print(f"An error occured: {e}")
+            print(f"Algo inesperado aconteceu: {e}")
 
     @staticmethod #Define como método não uma instancia, ou seja, não é necessário o self
     def listarClientes(conexao):
@@ -47,7 +43,7 @@ class Cliente():
             carregando()
             return resultado
         except Exception as e:
-            print(f"An error occured: {e}")
+            print(f"Algo inesperado aconteceu: {e}")
 
     @staticmethod
     def buscarPorCpf(conexao, valor):
@@ -57,7 +53,7 @@ class Cliente():
             carregando()
             return resultado
         except Exception as e:
-            print(f"An error occured: {e}")
+            print(f"Algo inesperado aconteceu: {e}")
 
     @staticmethod
     def deletarCliente(conexao, valor):
@@ -69,7 +65,7 @@ class Cliente():
             print(f"ERRO: Ação não realizada, será necessário remover o veículo do cliente primeiro")
             print("")
         except Exception as e:
-            print(f"An error occured: {e}")
+            print(f"Algo inesperado aconteceu: {e}")
 
     @staticmethod
     def atualizarCliente(conexao, tabela, novo, onde):
@@ -78,4 +74,4 @@ class Cliente():
             conexao.executar(atualizar, (novo, onde))
             atualizado()
         except Exception as e:
-            print(f"An error occured: {e}")
+            print(f"Algo inesperado aconteceu: {e}")
